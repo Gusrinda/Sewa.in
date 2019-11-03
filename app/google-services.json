@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "404817337434",
+    "firebase_url": "https://sewain-fbed3.firebaseio.com",
+    "project_id": "sewain-fbed3",
+    "storage_bucket": "sewain-fbed3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:404817337434:android:350b4999da63db008dcc63",
+        "android_client_info": {
+          "package_name": "com.example.sewain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "404817337434-eceote1j0d7g94j6p6i41lle06nbgbe4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sewain",
+            "certificate_hash": "0bdbad7a6149bb8127eb4faa299eecff0ac45c04"
+          }
+        },
+        {
+          "client_id": "404817337434-7pe85mg31sg71l2a06hj1h34img2mkbi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7XHTgFuRvgLc3Yl8liX2dUeGwYDrkxD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "404817337434-7pe85mg31sg71l2a06hj1h34img2mkbi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

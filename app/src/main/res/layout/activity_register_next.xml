@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="100px"
+    tools:context=".LoginActivity">
+    <TextView
+        android:text="Register"
+        android:textSize="100px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:text="Silahkan unggah foto KTP kamu"
+        android:paddingBottom="100px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:text="Foto KTP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/imgKTP"
+        android:background="@drawable/text_box"
+        android:layout_width="match_parent"
+        android:layout_height="800px"/>
+    <LinearLayout
+        android:paddingTop="50px"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnRegister"
+            android:text="Register"
+            android:textColor="#FEFEFE"
+            android:background="#43425D"
+            android:layout_width="450px"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:textColor="#FEFEFE"
+            android:id="@+id/btnBatal"
+            android:background="#3B85FE"
+            android:text="Batal"
+            android:layout_width="450px"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Apakah anda sudah memiliki akun?"/>
+    <TextView
+        android:id="@+id/txtMasuk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#185AF4"
+        android:textColorLink="@color/colorPrimaryDark"
+        android:text="Masuk Disini"/>
+
+
+</LinearLayout>

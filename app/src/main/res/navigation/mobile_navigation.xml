@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_daftar_kendaraan">
+
+    <fragment
+        android:id="@+id/nav_tambah_kendaraan"
+        android:label="@string/menu_tambah_kendaraan"
+        tools:layout="@layout/fragment_kendaraan_saya" />
+
+    <fragment
+        android:id="@+id/nav_kendaraan_saya"
+        android:label="@string/menu_kendaraan_saya"
+        tools:layout="@layout/fragment_tambah_kendaraan" />
+
+    <fragment
+        android:id="@+id/nav_daftar_kendaraan"
+        android:label="@string/menu_daftar_kendaraan"
+        tools:layout="@layout/fragment_cari_kendaraan" />
+
+    <fragment
+        android:id="@+id/nav_pesan"
+        android:label="@string/menu_pesan"
+        tools:layout="@layout/fragment_tools" />
+
+    <fragment
+        android:id="@+id/nav_keluar"
+        android:label="@string/menu_keluar"
+        tools:layout="@layout/fragment_pesan" />
+</navigation>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="100px"
+    tools:context=".LoginActivity">
+    <TextView
+        android:text="Login"
+        android:textSize="100px"
+        android:paddingBottom="100px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/edtUsername"
+        android:background="@drawable/text_box"
+        android:layout_width="match_parent"
+        android:paddingLeft="50px"
+        android:layout_height="100px"
+        android:hint="Username"/>
+    <EditText
+        android:id="@+id/edtPassword"
+        android:paddingLeft="50px"
+        android:layout_marginTop="50px"
+        android:background="@drawable/text_box"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:hint="Password"/>
+    <LinearLayout
+        android:paddingTop="50px"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnLogin"
+            android:text="Login"
+            android:textColor="#FEFEFE"
+            android:background="#43425D"
+            android:layout_width="450px"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:textColor="#FEFEFE"
+            android:id="@+id/btnBatal"
+            android:background="#3B85FE"
+            android:text="Batal"
+            android:layout_width="450px"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="12dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Apakah anda belum memiliki akun?"/>
+
+    <TextView
+        android:gravity="center_horizontal"
+        android:id="@+id/txtDaftar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#185AF4"
+        android:textColorLink="@color/colorPrimaryDark"
+        android:text="Daftar Disini"/>
+
+    <com.google.android.gms.common.SignInButton
+        android:layout_marginTop="32dp"
+        android:id="@+id/btn_google"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+</LinearLayout>
