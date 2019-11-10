@@ -14,10 +14,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <TextView
-        android:text="Silahkan unggah foto KTP kamu"
-        android:paddingBottom="100px"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:text="Silahkan masukkan password dan unggah foto KTP kamu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"/>
+
     <TextView
         android:text="Foto KTP"
         android:layout_width="match_parent"
@@ -48,11 +49,15 @@
             android:layout_width="450px"
             android:layout_height="wrap_content"/>
     </LinearLayout>
+
     <TextView
+        android:layout_marginTop="12dp"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Apakah anda sudah memiliki akun?"/>
     <TextView
+        android:gravity="center"
         android:id="@+id/txtMasuk"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

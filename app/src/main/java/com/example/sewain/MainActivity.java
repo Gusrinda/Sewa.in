@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.sewain.Model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -20,7 +21,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements User.UserValueListener {
 
     ImageView GambarProfile;
     TextView Nama, Email, ID;
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         Email = findViewById(R.id.txt_Email);
         ID = findViewById(R.id.txt_ID);
         Logout = findViewById(R.id.btn_logout);
+
+        User.getCurrentUser(this);
 
         Logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
             ID.setText(personId);
             Glide.with(this).load(String.valueOf(personPhoto)).into(GambarProfile);
         }
-
     }
 
     private void signOut() {
@@ -82,6 +84,13 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+    }
+
+    public User onUserChange(User user) {
+        Nama.setText(user.getUsername());
+        Email.setText(user.getEmail());
+        ID.setText(user.getId());
+        return user;
     }
 
 

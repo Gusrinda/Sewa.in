@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -31,11 +33,26 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final int MY_REQUEST_CODE = 1;
     FirebaseAuth mAuth;
+    FirebaseUser mUser;
     Button btn_login, btn_batal;
     SignInButton btn_google;
-    EditText txt_Username, txt_Password;
+    EditText txt_Email, txt_Password;
     TextView txt_Daftar;
     GoogleSignInClient mGoogleSignInClient;
+
+    protected void onStart() {
+        super.onStart();
+
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
+
+//        //mengecek apakah user null?
+//        if (mUser != null){
+//            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +62,12 @@ public class LoginActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.btnLogin);
         btn_batal = findViewById(R.id.btnBatal);
         btn_google = findViewById(R.id.btn_google);
-        txt_Username = findViewById(R.id.edtUsername);
+        txt_Email = findViewById(R.id.edtEmail);
         txt_Password = findViewById(R.id.edtPassword);
         txt_Daftar = findViewById(R.id.txtDaftar);
 
         mAuth = FirebaseAuth.getInstance();
+
 
         btn_google.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +87,41 @@ public class LoginActivity extends AppCompatActivity {
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        txt_Daftar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            }
+        });
+
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String txt_email = txt_Email.getText().toString();
+                String txt_password = txt_Password.getText().toString();
+
+                if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)) {
+                    Toast.makeText(LoginActivity.this, "Semua field harus terisi Fergusso!!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    mAuth.signInWithEmailAndPassword(txt_email, txt_password)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()){
+                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Anda tidak terautentifikasi Fergusso!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                }
+            }
+        });
 
     }
 
@@ -96,8 +149,8 @@ public class LoginActivity extends AppCompatActivity {
             }
 
 //            handleSignInResult(task);
-            }
         }
+    }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d("message", "firebaseAuthWithGoogle:" + acct.getId());
@@ -116,7 +169,7 @@ public class LoginActivity extends AppCompatActivity {
                             Snackbar.make(findViewById(R.id.layout_login), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
                         }
 
-                     }
+                    }
                 });
     }
 
