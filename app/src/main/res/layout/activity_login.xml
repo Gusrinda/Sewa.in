@@ -16,12 +16,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <EditText
-        android:id="@+id/edtUsername"
+        android:id="@+id/edtEmail"
         android:background="@drawable/text_box"
         android:layout_width="match_parent"
         android:paddingLeft="50px"
         android:layout_height="100px"
-        android:hint="Username"/>
+        android:hint="Email"/>
     <EditText
         android:id="@+id/edtPassword"
         android:paddingLeft="50px"
