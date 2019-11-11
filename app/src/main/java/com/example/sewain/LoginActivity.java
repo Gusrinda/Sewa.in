@@ -3,6 +3,7 @@ package com.example.sewain;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -32,6 +33,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class LoginActivity extends AppCompatActivity {
 
     private static final int MY_REQUEST_CODE = 1;
+    ProgressDialog progress;
     FirebaseAuth mAuth;
     FirebaseUser mUser;
     Button btn_login, btn_batal;
@@ -65,6 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         txt_Email = findViewById(R.id.edtEmail);
         txt_Password = findViewById(R.id.edtPassword);
         txt_Daftar = findViewById(R.id.txtDaftar);
+        progress = new ProgressDialog(this);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -98,6 +101,12 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progress.setMessage("Please Wait");
+                progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progress.setCancelable(false);
+                progress.setCanceledOnTouchOutside(false);
+                progress.setIndeterminate(false);
+                progress.show();
                 String txt_email = txt_Email.getText().toString();
                 String txt_password = txt_Password.getText().toString();
 
@@ -112,9 +121,11 @@ public class LoginActivity extends AppCompatActivity {
                                     if (task.isSuccessful()){
                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        progress.hide();
                                         startActivity(intent);
                                         finish();
                                     } else {
+                                        progress.hide();
                                         Toast.makeText(LoginActivity.this, "Anda tidak terautentifikasi Fergusso!", Toast.LENGTH_SHORT).show();
                                     }
                                 }

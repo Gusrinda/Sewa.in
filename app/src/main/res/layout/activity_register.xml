@@ -14,23 +14,38 @@
         android:paddingBottom="100px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/edtNama"
-        android:background="@drawable/text_box"
-        android:layout_width="match_parent"
-        android:paddingLeft="50px"
-        android:layout_height="100px"
-        android:hint="Nama"/>
 
-    <EditText
-        android:id="@+id/edtEmail"
-        android:paddingLeft="50px"
-        android:layout_marginTop="50px"
-        android:background="@drawable/text_box"
-        android:inputType="textEmailAddress"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="100px"
-        android:hint="Email"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtNama"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nama"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtEmail"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:hint="Email"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -59,7 +74,7 @@
             android:id="@+id/edtRePass"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Password"
+            android:hint="Password Ulang"
             android:inputType="textPassword"
             />
 
@@ -77,21 +92,13 @@
 
         <Button
             android:id="@+id/btnSelanjutnya"
-            android:text="Selanjutnya"
+            android:text="Daftar"
             android:textColor="#FEFEFE"
-            android:background="#43425D"
+            android:background="#3B85FE"
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"/>
 
-        <Button
-            android:textColor="#FEFEFE"
-            android:id="@+id/btnBatal"
-            android:background="#3B85FE"
-            android:text="Batal"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <TextView
