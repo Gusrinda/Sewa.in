@@ -28,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText username, email, noHp;
     Button btnDaftar;
     TextView txtMasuk;
+    ProgressDialog progress;
 
     TextInputEditText password, repassword;
 
@@ -40,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        progress = new ProgressDialog(this);
         username = findViewById(R.id.edtNama);
         email = findViewById(R.id.edtEmail);
         password = findViewById(R.id.edtPass);
@@ -48,6 +50,13 @@ public class RegisterActivity extends AppCompatActivity {
         txtMasuk = findViewById(R.id.txtMasuk);
 
         mAuth = FirebaseAuth.getInstance();
+
+        txtMasuk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+            }
+        });
 
         btnDaftar.setOnClickListener(view -> {
 
@@ -58,18 +67,22 @@ public class RegisterActivity extends AppCompatActivity {
 
             if (TextUtils.isEmpty(txt_Username) || TextUtils.isEmpty(txt_Email) || TextUtils.isEmpty(txt_Password)) {
                 Toast.makeText(RegisterActivity.this, "Lengkapi semua field Fergusso!", Toast.LENGTH_SHORT).show();
-            } else if (!txt_Password.equals(txt_Password)){
+            } else if (!txt_Password.equals(txt_RePassword)){
                 Toast.makeText(RegisterActivity.this, "Password harus sama ya bro!", Toast.LENGTH_SHORT).show();
             }
             else {
                 register(txt_Username, txt_Email, txt_Password);
             }
         });
-
-
     }
 
     private void register(final String username, String email, String password) {
+        progress.setMessage("Please Wait");
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress.setCancelable(false);
+        progress.setCanceledOnTouchOutside(false);
+        progress.setIndeterminate(false);
+        progress.show();
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -90,8 +103,10 @@ public class RegisterActivity extends AppCompatActivity {
                                 startActivity(intent);
                                 finish();
                             }
+                            progress.hide();
                         });
                     } else {
+                        progress.hide();
                         Toast.makeText(RegisterActivity.this, "Tidak bisa register dengan Email dan Password ini Fergusso!", Toast.LENGTH_SHORT).show();
                     }
                 });
