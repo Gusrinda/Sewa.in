@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     TextView Nama, Email, ID;
     Button Logout;
 
+    //hanya untuk menambahkan commit
+
     GoogleSignInClient mGoogleSignInClient;
 
     @Override
