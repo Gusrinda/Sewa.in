@@ -18,7 +18,6 @@ import com.bumptech.glide.Glide;
 import com.example.sewain.Model.User;
 import com.example.sewain.ui.cari_kendaraan.CariKendaraanFragment;
 import com.example.sewain.ui.pesan.PesanFragment;
-import com.example.sewain.ui.profil.ProfilFragment;
 import com.example.sewain.ui.tambah_kendaraan.TambahKendaraanFragment;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -28,7 +27,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, User.UserValueListener {
     private  BottomNavigationView nav;
     ImageView GambarProfile;
     TextView Nama, Email, ID;
@@ -43,12 +42,70 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        GambarProfile = findViewById(R.id.img_profile);
+        Nama = findViewById(R.id.txt_Nama);
+        Email = findViewById(R.id.txt_Email);
+        ID = findViewById(R.id.txt_ID);
         nav = findViewById(R.id.nav_view);
 
         nav.setOnNavigationItemSelectedListener(this);
         nav.setSelectedItemId(R.id.navigation_home);
 
+        Logout = findViewById(R.id.btn_keluar);
+
+        User.getCurrentUser(this);
+
+        Logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+
+                    case R.id.btn_keluar:
+                        signOut();
+                        break;
+                }
+            }
+        });
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        if (acct != null) {
+            String personName = acct.getDisplayName();
+            String personEmail = acct.getEmail();
+            String personId = acct.getId();
+            Uri personPhoto = acct.getPhotoUrl();
+
+            Nama.setText(personName);
+            Email.setText(personEmail);
+            ID.setText(personId);
+            Glide.with(this).load(String.valueOf(personPhoto)).into(GambarProfile);
+        }
     }
+
+    private void signOut() {
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(MainActivity.this, "Berhasil Logout", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
+                });
+    }
+
+    public User onUserChange(User user) {
+        Nama.setText(user.getUsername());
+        Email.setText(user.getEmail());
+        ID.setText(user.getId());
+        return user;
+    }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -72,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 break;
 
             case R.id.navigation_akun:
-                fragment = new ProfilFragment();
+                fragment = new TambahKendaraanFragment();
                 break;
         }
         return loadFragment(fragment);
