@@ -36,7 +36,7 @@ public class NavigationPanel extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_tambah_kendaraan, R.id.nav_kendaraan_saya, R.id.nav_daftar_kendaraan,
+                R.id.nav_tambah_kendaraan, R.id.nav_kendaraan_saya, R.id.nav_cari_kendaraan,
                 R.id.nav_pesan, R.id.nav_signout)
                 .setDrawerLayout(drawer)
                 .build();

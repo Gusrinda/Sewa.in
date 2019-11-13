@@ -13,7 +13,7 @@
             android:icon="@drawable/ic_motorcycle_black_24dp"
             android:title="@string/menu_kendaraan_saya" />
         <item
-            android:id="@+id/nav_daftar_kendaraan"
+            android:id="@+id/nav_cari_kendaraan"
             android:icon="@drawable/ic_search_black_24dp"
             android:title="@string/menu_daftar_kendaraan" />
     </group>

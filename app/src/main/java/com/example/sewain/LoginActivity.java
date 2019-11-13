@@ -111,7 +111,9 @@ public class LoginActivity extends AppCompatActivity {
                 String txt_password = txt_Password.getText().toString();
 
                 if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)) {
-                    Toast.makeText(LoginActivity.this, "Semua field harus terisi Fergusso!!", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(R.id.layout_login), "Semua field harus terisi Fergusso!!", Snackbar.LENGTH_SHORT).show();
+//                    Toast.makeText(LoginActivity.this, "Semua field harus terisi Fergusso!!", Toast.LENGTH_SHORT).show();
+                    progress.hide();
                 }
                 else {
                     mAuth.signInWithEmailAndPassword(txt_email, txt_password)
@@ -126,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                                         finish();
                                     } else {
                                         progress.hide();
+//                                        Snackbar.make(findViewById(R.id.layout_login), "Anda tidak terautentifikasi Fergusso!", Snackbar.LENGTH_SHORT).show();
                                         Toast.makeText(LoginActivity.this, "Anda tidak terautentifikasi Fergusso!", Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -156,7 +159,8 @@ public class LoginActivity extends AppCompatActivity {
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w("error", "Google sign in failed", e);
-                // ...
+//                Snackbar.make(findViewById(R.id.layout_login), "Silahkan login dengan metode lain.", Snackbar.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Silahkan login dengan metode lain!!", Toast.LENGTH_SHORT).show();
             }
 
 //            handleSignInResult(task);
