@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.sewain.Model.User;
 import com.example.sewain.ui.cari_kendaraan.CariKendaraanFragment;
 import com.example.sewain.ui.pesan.PesanFragment;
+import com.example.sewain.ui.profil.ProfilFragment;
 import com.example.sewain.ui.tambah_kendaraan.TambahKendaraanFragment;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -49,23 +50,20 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         nav = findViewById(R.id.nav_view);
 
         nav.setOnNavigationItemSelectedListener(this);
-        nav.setSelectedItemId(R.id.navigation_home);
+        nav.setSelectedItemId(R.id.navigation_cari);
 
         Logout = findViewById(R.id.btn_keluar);
 
-        User.getCurrentUser(this);
-
-        Logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (view.getId()) {
-
-                    case R.id.btn_keluar:
-                        signOut();
-                        break;
-                }
-            }
-        });
+//        User.getCurrentUser(this);
+//
+//        Logout.setOnClickListener(view -> {
+//            switch (view.getId()) {
+//
+//                case R.id.btn_keluar:
+//                    signOut();
+//                    break;
+//            }
+//        });
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -73,18 +71,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-        if (acct != null) {
-            String personName = acct.getDisplayName();
-            String personEmail = acct.getEmail();
-            String personId = acct.getId();
-            Uri personPhoto = acct.getPhotoUrl();
-
-            Nama.setText(personName);
-            Email.setText(personEmail);
-            ID.setText(personId);
-            Glide.with(this).load(String.valueOf(personPhoto)).into(GambarProfile);
-        }
     }
 
     private void signOut() {
@@ -112,9 +98,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         Fragment fragment = null;
 
         switch (menuItem.getItemId()) {
-            case R.id.navigation_home:
-                fragment = new CariKendaraanFragment();
-                break;
 
             case R.id.navigation_tambah:
                 fragment = new TambahKendaraanFragment();
@@ -129,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 break;
 
             case R.id.navigation_akun:
-                fragment = new TambahKendaraanFragment();
+                fragment = new ProfilFragment();
                 break;
         }
         return loadFragment(fragment);
