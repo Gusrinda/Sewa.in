@@ -70,6 +70,7 @@ public class TambahKendaraanFragment extends Fragment {
     private ImageView gambar;
     private String userid;
     private Bitmap foto;
+    private String key;
     private AppCompatSpinner spinnerJenis;
 
     FirebaseAuth mAuth;
@@ -197,7 +198,7 @@ public class TambahKendaraanFragment extends Fragment {
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
         assert firebaseUser != null;
         userid = firebaseUser.getUid();
-        String key = FirebaseDatabase.getInstance().getReference("Kendaraan").push().getKey();
+        key = FirebaseDatabase.getInstance().getReference("Kendaraan").push().getKey();
         mReference = FirebaseDatabase.getInstance().getReference("Kendaraan").child(key);
 
         HashMap<String, String> hashMap = new HashMap<>();
@@ -205,11 +206,11 @@ public class TambahKendaraanFragment extends Fragment {
         hashMap.put("Nama Kendaraan", txt_namaKendaraan);
         hashMap.put("Jenis Kendaraan", txt_jenisKendaraan);
         hashMap.put("Harga Sewa", txt_hargaSewa);
-        hashMap.put("Alamat Kendaraan", txt_alamatKendaraan);
+        hashMap.put("Lokasi Kendaraan", txt_alamatKendaraan);
         hashMap.put("Lattitude", txt_latti);
         hashMap.put("Longitude", txt_longi);
         hashMap.put("Deskripsi Kendaraan", txt_deskripsiKendaraan);
-        hashMap.put("Foto Kendaraan", foto.toString());
+        hashMap.put("Kendaraan Id", key);
 
         mReference.setValue(hashMap).addOnCompleteListener(task1 -> {
         if (task1.isSuccessful()) {
@@ -240,7 +241,6 @@ public class TambahKendaraanFragment extends Fragment {
         byte[] data = baos.toByteArray();
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        String key = FirebaseDatabase.getInstance().getReference("Kendaraan").push().getKey();
         StorageReference storageRef = storage.getReferenceFromUrl("gs://sewain-fbed3.appspot.com");
         StorageReference imagesRef = storageRef.child("Kendaraan").child(userid).child(key);
 

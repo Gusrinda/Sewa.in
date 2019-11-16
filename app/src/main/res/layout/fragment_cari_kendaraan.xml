@@ -18,44 +18,11 @@
             android:textAlignment="center"
             android:paddingBottom="80px"
             android:textSize="50px"/>
-        <LinearLayout
-            android:orientation="horizontal"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:orientation="vertical"
+            android:scrollbars="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
-                android:elevation="2dp"
-                android:layout_margin="20px"
-                android:orientation="vertical"
-                android:layout_width="500px"
-                android:layout_height="650px">
-                <ImageView
-                    android:id="@+id/imgFotoKendaraanSaya"
-                    android:elevation="9dp"
-                    android:background="@drawable/shadow"
-                    android:layout_width="match_parent"
-                    android:layout_height="450px"/>
-                <LinearLayout
-                    android:padding="20px"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/txtJenisKendaraan"
-                        android:text="@string/jenis_kendaraan"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                    <TextView
-                        android:id="@+id/txtHargwaSewa"
-                        android:text="@string/harga_sewa"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                    <TextView
-                        android:id="@+id/txtLokasi"
-                        android:text="@string/lokasi_kendaraan"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
+            android:layout_height="match_parent"/>
     </LinearLayout>
 </ScrollView>
