@@ -52,6 +52,7 @@
                 <androidx.appcompat.widget.AppCompatSpinner
                     android:layout_marginVertical="4dp"
                     android:id="@+id/SpinnerJenis"
+                    android:entries="@array/jenis_kendaraan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -145,10 +146,10 @@
 
                     <ImageView
                         android:id="@+id/fotoKendaraan"
-                        android:src="@drawable/ic_search_black_24dp"
+                        android:src="@drawable/foto"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
-                        android:background="@color/cardview_dark_background"/>
+                        android:background="@drawable/text_box"/>
                     <Button
                         android:id="@+id/ambilFoto"
                         android:layout_gravity="end"
@@ -160,7 +161,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
 
         </LinearLayout>
 
