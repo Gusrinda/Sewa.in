@@ -11,6 +11,7 @@
     <string name="menu_tambah_kendaraan">Tambah Kendaraan</string>
     <string name="menu_kendaraan_saya">Kendaraan Saya</string>
     <string name="menu_daftar_kendaraan">Cari Kendaraan</string>
+    <string name="detail_kendaraan">Detail Kendaraan</string>
     <string name="menu_pesan">Pesan</string>
     <string name="menu_keluar">Keluar</string>
     <string name="nama_kendaraan">Nama Kendaraan</string>
@@ -21,6 +22,8 @@
     <string name="foto_kendaraaan">Foto Kendaraan</string>
     <string name="button_simpan">SIMPAN</string>
     <string name="button_batal">BATAL</string>
+    <string name="button_sewa">SEWA</string>
+    <string name="button_kirim_pesan">KIRIM PESAN</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -55,6 +56,7 @@ public class CariKendaraanFragment extends Fragment {
 
     private StorageReference mStorageRef;
     private ProgressDialog mProgress;
+    private GridLayoutManager gridLayoutManager;
     private DatabaseReference myRef;
 
     private Geocoder geocoder;
@@ -82,7 +84,6 @@ public class CariKendaraanFragment extends Fragment {
         hargaSewa = root.findViewById(R.id.txtHargwaSewa);
         lokasi = root.findViewById(R.id.txtLokasi);
 
-
         ArrayList<CariKendaraanViewModel> listKendaraan = new ArrayList<>();
         // Write a message to the database
         myRef = FirebaseDatabase.getInstance().getReference("Kendaraan");
@@ -91,12 +92,7 @@ public class CariKendaraanFragment extends Fragment {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String mNamaKendaraan;
-                String mHargaSewa;
-                String mLokasi;
-                String idUser;
-                String idKendaraan;
-                String foto;
+                String mNamaKendaraan, mHargaSewa, mLokasi, idUser, idKendaraan, foto;
                 String url="https://firebasestorage.googleapis.com/v0/b/sewain-fbed3.appspot.com/o/Kendaraan";//Retrieved url as mentioned above
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     mNamaKendaraan = (String) snapshot.child("Nama Kendaraan").getValue();
@@ -108,8 +104,9 @@ public class CariKendaraanFragment extends Fragment {
                     listKendaraan.add(new CariKendaraanViewModel(mNamaKendaraan, mHargaSewa, mLokasi, foto));
                 }
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-                mRecyclerView = root.findViewById(R.id.recyclerview);
-                mRecyclerView.setLayoutManager(layoutManager);
+                mRecyclerView = (RecyclerView) root.findViewById(R.id.recyclerview);
+                gridLayoutManager = new GridLayoutManager(getContext(), 2);
+                mRecyclerView.setLayoutManager(gridLayoutManager);
                 if (getActivity()!=null){
                     mAdapter = new KendaraanAdapter(getContext(), listKendaraan);
                 }

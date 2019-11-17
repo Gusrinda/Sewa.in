@@ -9,10 +9,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.sewain.DetailKendaraanFragment;
 import com.example.sewain.R;
 import com.example.sewain.ui.cari_kendaraan.CariKendaraanViewModel;
 
@@ -62,6 +65,9 @@ public class KendaraanAdapter extends RecyclerView.Adapter <KendaraanAdapter.Cus
             public void onClick(View view) {
                 Toast.makeText(mInflater.getContext(), current.getNama_kendaraan(),
                         Toast.LENGTH_LONG).show();
+                DetailKendaraanFragment detailKendaraanFragment = new DetailKendaraanFragment();
+                loadFragment(detailKendaraanFragment);
+
             }
         });
     }
@@ -90,4 +96,16 @@ public class KendaraanAdapter extends RecyclerView.Adapter <KendaraanAdapter.Cus
 // Add click listener, if desired
         }
     }
+    private boolean loadFragment(Fragment fragment) {
+        //switching fragment
+        if (fragment != null) {
+            ((AppCompatActivity) context).getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commit();
+            return true;
+        }
+        return false;
+    }
+
 }
