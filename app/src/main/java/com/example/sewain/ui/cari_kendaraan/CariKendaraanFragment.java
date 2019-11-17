@@ -84,6 +84,7 @@ public class CariKendaraanFragment extends Fragment {
         hargaSewa = root.findViewById(R.id.txtHargwaSewa);
         lokasi = root.findViewById(R.id.txtLokasi);
 
+
         ArrayList<CariKendaraanViewModel> listKendaraan = new ArrayList<>();
         // Write a message to the database
         myRef = FirebaseDatabase.getInstance().getReference("Kendaraan");
@@ -92,7 +93,12 @@ public class CariKendaraanFragment extends Fragment {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String mNamaKendaraan, mHargaSewa, mLokasi, idUser, idKendaraan, foto;
+                String mNamaKendaraan;
+                String mHargaSewa;
+                String mLokasi;
+                String idUser;
+                String idKendaraan;
+                String foto;
                 String url="https://firebasestorage.googleapis.com/v0/b/sewain-fbed3.appspot.com/o/Kendaraan";//Retrieved url as mentioned above
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     mNamaKendaraan = (String) snapshot.child("Nama Kendaraan").getValue();
