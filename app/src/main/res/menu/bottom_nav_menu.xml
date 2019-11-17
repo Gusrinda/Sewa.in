@@ -21,4 +21,9 @@
         android:icon="@drawable/ic_account_circle_black_24dp"
         android:title="Akun" />
 
+    <item
+        android:id="@+id/navigation_chat"
+        android:icon="@drawable/ic_message_black_24dp"
+        android:title="ChatList" />
+
 </menu>

@@ -18,18 +18,20 @@ public class User {
     private String id;
     private String username;
     private String email;
+    private String urlPhoto;
     private int point = 0;
 
     static final String TAG = "USER";
 
     public final static int incrementPoint = 10;
 
-    public User(String id, String username, String email) {
+
+    public User(String id, String username, String email, String urlPhoto) {
         this.id = id;
         this.username = username;
         this.email = email;
+        this.urlPhoto = urlPhoto;
     }
-
 
     public User setPoint(int point) {
         this.point = point;
@@ -53,7 +55,6 @@ public class User {
                     user.point += incrementPoint;
                     mReference.setValue(user);
                 }
-
             }
 
             @Override
@@ -99,6 +100,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUrlPhoto() {
+        return urlPhoto;
+    }
+
+    public void setUrlPhoto(String urlPhoto) {
+        this.urlPhoto = urlPhoto;
     }
 
     public String getUsername() {

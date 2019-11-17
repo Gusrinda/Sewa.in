@@ -99,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                         mReference.setValue(hashMap).addOnCompleteListener(task1 -> {
                             if (task1.isSuccessful()) {
-                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                Intent intent = new Intent(RegisterActivity.this, RegisterNextActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();
@@ -111,6 +111,8 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "Tidak bisa register dengan Email dan Password ini Fergusso!", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+
 
     }
 }

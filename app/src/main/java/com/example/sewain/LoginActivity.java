@@ -28,6 +28,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -41,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText txt_Email, txt_Password;
     TextView txt_Daftar;
     GoogleSignInClient mGoogleSignInClient;
+    DatabaseReference mReference;
 
     protected void onStart() {
         super.onStart();
@@ -60,7 +65,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         btn_login = findViewById(R.id.btnLogin);
-        btn_batal = findViewById(R.id.btnBatal);
         btn_google = findViewById(R.id.btn_google);
         txt_Email = findViewById(R.id.edtEmail);
         txt_Password = findViewById(R.id.edtPassword);
@@ -152,8 +156,6 @@ public class LoginActivity extends AppCompatActivity {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w("error", "Google sign in failed", e);
@@ -176,6 +178,26 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("message", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            assert user != null;
+                            String userid = user.getUid();
+
+                            mReference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+
+                            HashMap<String, String> hashMap = new HashMap<>();
+                            hashMap.put("id", userid);
+                            hashMap.put("username", user.getDisplayName());
+                            hashMap.put("email", user.getEmail());
+                            hashMap.put("urlPhoto", "default");
+
+                            mReference.setValue(hashMap).addOnCompleteListener(task1 -> {
+                                if (task1.isSuccessful()) {
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("error", "signInWithCredential:failure", task.getException());

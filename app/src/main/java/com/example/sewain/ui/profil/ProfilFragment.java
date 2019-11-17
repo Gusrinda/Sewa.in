@@ -29,6 +29,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.squareup.picasso.Picasso;
 
 public class ProfilFragment extends Fragment implements User.UserValueListener {
 
@@ -38,6 +39,7 @@ public class ProfilFragment extends Fragment implements User.UserValueListener {
     Button Logout;
     View root;
     GoogleSignInClient mGoogleSignInClient;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -101,6 +103,7 @@ public class ProfilFragment extends Fragment implements User.UserValueListener {
         Nama.setText(user.getUsername());
         Email.setText(user.getEmail());
         ID.setText(user.getId());
+        Picasso.get().load(user.getUrlPhoto()).fit().centerCrop().into(GambarProfile);
         return user;
     }
 }
