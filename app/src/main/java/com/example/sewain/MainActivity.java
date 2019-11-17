@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.sewain.Model.User;
 import com.example.sewain.ui.cari_kendaraan.CariKendaraanFragment;
+import com.example.sewain.ui.chat_list.chat_list;
 import com.example.sewain.ui.pesan.PesanFragment;
 import com.example.sewain.ui.profil.ProfilFragment;
 import com.example.sewain.ui.tambah_kendaraan.TambahKendaraanFragment;
@@ -113,6 +114,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
             case R.id.navigation_akun:
                 fragment = new ProfilFragment();
+                break;
+
+
+            case R.id.navigation_chat:
+                fragment = new chat_list();
                 break;
         }
         return loadFragment(fragment);

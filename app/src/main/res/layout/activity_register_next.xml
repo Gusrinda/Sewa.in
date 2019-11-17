@@ -8,62 +8,88 @@
     android:gravity="center"
     android:padding="100px"
     tools:context=".LoginActivity">
+
     <TextView
-        android:text="Register"
-        android:textSize="100px"
+        android:text="Tambahkan data akun !"
+        android:textSize="24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
     <TextView
-        android:text="Silahkan masukkan password dan unggah foto KTP kamu"
+        android:text="Anda telah terdafatar, tetapi kami perlu menammbah data anda dengan foto akun serta foto KTP anda !"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:textSize="12dp"/>
+
+    <TextView
+        android:layout_marginTop="6dp"
+        android:text="Foto Akun"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/imgAkun"
+        android:background="@drawable/text_box"
+        android:layout_width="120dp"
+        android:layout_height="120dp"/>
+
+    <Button
+        android:layout_marginVertical="4dp"
+        android:id="@+id/ambilFotoAkun"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:text="Ambil Foto"
+        android:textSize="10sp"
+        android:background="@color/fui_transparent"
+        />
 
     <TextView
         android:text="Foto KTP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
     <ImageView
         android:id="@+id/imgKTP"
         android:background="@drawable/text_box"
         android:layout_width="match_parent"
-        android:layout_height="800px"/>
+        android:layout_height="120dp"/>
+
+    <Button
+        android:layout_marginVertical="4dp"
+        android:id="@+id/ambilFotoKtp"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:text="Ambil Foto"
+        android:textSize="10sp"
+        android:background="@color/fui_transparent"
+        />
+
     <LinearLayout
         android:paddingTop="50px"
         android:gravity="center"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:weightSum="2">
         <Button
-            android:id="@+id/btnRegister"
-            android:text="Register"
+            android:id="@+id/btnTambahData"
+            android:text="TAMBAH DATA"
             android:textColor="#FEFEFE"
-            android:background="#43425D"
-            android:layout_width="450px"
+            android:background="#3B85FE"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
             android:layout_height="wrap_content"/>
         <Button
             android:textColor="#FEFEFE"
-            android:id="@+id/btnBatal"
-            android:background="#3B85FE"
-            android:text="Batal"
-            android:layout_width="450px"
+            android:id="@+id/btnSkip"
+            android:background="#43425D"
+            android:text="SKIP"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <TextView
-        android:layout_marginTop="12dp"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Apakah anda sudah memiliki akun?"/>
-    <TextView
-        android:gravity="center"
-        android:id="@+id/txtMasuk"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#185AF4"
-        android:textColorLink="@color/colorPrimaryDark"
-        android:text="Masuk Disini"/>
 
 
 </LinearLayout>

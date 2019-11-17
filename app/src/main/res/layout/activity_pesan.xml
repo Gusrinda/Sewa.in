@@ -1,29 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PesanActivity">
-    <LinearLayout
-        android:orientation="vertical"
+
+
+    <TextView
+        android:layout_marginTop="16dp"
+        android:id="@+id/text_Header"
+        android:text="Nama User"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:elevation="2dp"
-            android:padding="20px"
-            android:layout_margin="10px"
-            android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="24dp"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycler_view"
+        android:layout_below="@+id/text_Header"
+        android:layout_above="@+id/bottom"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="5dp"
+        android:background="#fff"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom">
+
+        <EditText
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nama"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Last Chat"/>
-        </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+            android:layout_height="wrap_content"
+            android:id="@+id/text_send"
+            android:background="@android:color/transparent"
+            android:hint="Tulis pesan anda..."
+            android:layout_toLeftOf="@+id/btn_send"
+            android:layout_centerVertical="true"/>
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/btn_send"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_send_black_24dp"
+            android:background="@color/fui_transparent"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
