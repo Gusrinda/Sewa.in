@@ -1,5 +1,6 @@
 package com.example.sewain.ui.pesan;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -7,12 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +39,7 @@ public class PesanFragment extends Fragment {
     private List<User> mUser;
 
     EditText search_users;
+    ProgressDialog mProgress;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         pesanViewModel = ViewModelProviders.of(this).get(PesanViewModel.class);
@@ -50,6 +49,14 @@ public class PesanFragment extends Fragment {
         rvList = root.findViewById(R.id.rv_listUser);
         rvList.setHasFixedSize(true);
         rvList.setLayoutManager(new LinearLayoutManager(getContext()));
+        mProgress = new ProgressDialog(this.getContext());
+
+        mProgress.setMessage("Please Wait");
+        mProgress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgress.setCancelable(false);
+        mProgress.setCanceledOnTouchOutside(false);
+        mProgress.setIndeterminate(false);
+        mProgress.show();
 
         mUser = new ArrayList<>();
 
@@ -127,6 +134,7 @@ public class PesanFragment extends Fragment {
 
                     userAdapter = new AdapterUser(getContext(), mUser, false);
                     rvList.setAdapter(userAdapter);
+                    mProgress.dismiss();
                 }
 
             }

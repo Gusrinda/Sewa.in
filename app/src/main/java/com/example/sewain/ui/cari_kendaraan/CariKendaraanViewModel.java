@@ -2,12 +2,12 @@ package com.example.sewain.ui.cari_kendaraan;
 
 public class CariKendaraanViewModel {
 
-    private String nama_kendaraan, jenis_kendaraan, harga_sewa, latit, longit, deskripsi, lokasi, foto;
+    private String nama_kendaraan, jenis_kendaraan, harga_sewa, latit, longit, deskripsi, lokasi, foto, id_user, id_kendaraan;
 
     public CariKendaraanViewModel() {
     }
 
-    public CariKendaraanViewModel(String nama_kendaraan, String jenis_kendaraan, String harga_sewa, String latit, String longit, String deskripsi, String lokasi) {
+    public CariKendaraanViewModel(String idUser, String id_kendaraan, String nama_kendaraan, String jenis_kendaraan, String harga_sewa, String latit, String longit, String deskripsi, String lokasi, String foto) {
         this.nama_kendaraan = nama_kendaraan;
         this.jenis_kendaraan = jenis_kendaraan;
         this.harga_sewa = harga_sewa;
@@ -15,6 +15,9 @@ public class CariKendaraanViewModel {
         this.longit = longit;
         this.deskripsi = deskripsi;
         this.lokasi = lokasi;
+        this.foto = foto;
+        this.id_user = idUser;
+        this.id_kendaraan = id_kendaraan;
     }
 
     public CariKendaraanViewModel(String nama_kendaraan, String harga_sewa, String lokasi, String foto) {
@@ -86,5 +89,21 @@ public class CariKendaraanViewModel {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public String getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(String id_user) {
+        this.id_user = id_user;
+    }
+
+    public String getId_kendaraan() {
+        return id_kendaraan;
+    }
+
+    public void setId_kendaraan(String id_kendaraan) {
+        this.id_kendaraan = id_kendaraan;
     }
 }

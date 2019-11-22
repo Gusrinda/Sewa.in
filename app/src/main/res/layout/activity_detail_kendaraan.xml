@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/rl"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".DetailKendaraanActivity">
+
+<TextView
+    android:layout_marginTop="16dp"
+    android:id="@+id/text_tambah_kendaraan"
+    android:text="@string/detail_kendaraan"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textAlignment="center"
+    android:textSize="50px"/>
+
+<ScrollView
+    android:layout_below="@id/text_tambah_kendaraan"
+    android:layout_above="@+id/layoutBawah"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="50px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/txt_nama_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="50px"
+                    android:text="Nama Kendaraan"/>
+
+                <ImageView
+                    android:id="@+id/foto_kendaraan_detail"
+                    android:src="@drawable/foto"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"/>
+                <TextView
+                    android:id="@+id/txt_pemilik_detail"
+                    android:text="Pemilik"
+                    android:textSize="50px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/txt_jenis_detail"
+                    android:text="Jenis"
+                    android:textSize="50px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/txt_harga_detail"
+                    android:text="Harga"
+                    android:textSize="50px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/txt_deskripsi_detail"
+                    android:text="Detail"
+                    android:textSize="50px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
+
+<LinearLayout
+    android:id="@+id/layoutBawah"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="2"
+    android:layout_alignParentBottom="true">
+
+    <Button
+        android:id="@+id/btnPilih"
+        android:text="@string/button_pilih"
+        android:textColor="#FEFEFE"
+        android:background="#43425D"
+        android:layout_width="fill_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:textColor="#FEFEFE"
+        android:id="@+id/btnKirimPesan"
+        android:background="#3B85FE"
+        android:text="@string/button_kirim_pesan"
+        android:layout_width="fill_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
+
+</RelativeLayout>

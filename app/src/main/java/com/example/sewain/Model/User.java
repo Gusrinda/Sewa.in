@@ -19,6 +19,7 @@ public class User {
     private String username;
     private String email;
     private String urlPhoto;
+    private String urlKTP;
     private int point = 0;
 
     static final String TAG = "USER";
@@ -26,11 +27,12 @@ public class User {
     public final static int incrementPoint = 10;
 
 
-    public User(String id, String username, String email, String urlPhoto) {
+    public User(String id, String username, String email, String urlPhoto, String urlKTP) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.urlPhoto = urlPhoto;
+        this.urlKTP = urlKTP;
     }
 
     public User setPoint(int point) {
@@ -124,6 +126,14 @@ public class User {
 
     public static interface UserValueListener {
         User onUserChange(User user);
+    }
+
+    public String geturlKTP() {
+        return urlKTP;
+    }
+
+    public void seturlKTP(String urlKTP) {
+        this.urlKTP = urlKTP;
     }
 }
 

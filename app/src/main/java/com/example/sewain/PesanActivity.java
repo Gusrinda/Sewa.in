@@ -1,10 +1,5 @@
 package com.example.sewain;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +8,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.sewain.Adapter.MessageAdapter;
 import com.example.sewain.Model.Chat;
 import com.example.sewain.Model.User;
@@ -89,7 +88,11 @@ public class PesanActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                username.setText(user.getUsername());
+//                if (user!=null){
+                    username.setText(user.getUsername());
+//                }else{
+//                    Snackbar.make(findViewById(R.id.layout_cari_kendaraan), "Kendaraan ini tidak bisa dipesan!", Snackbar.LENGTH_SHORT).show();
+//                }
 
                 readMessages(fuser.getUid(), userid, user.getUrlPhoto());
             }

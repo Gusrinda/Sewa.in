@@ -36,7 +36,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.sewain.LoginActivity;
+import com.example.sewain.MainActivity;
 import com.example.sewain.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -93,7 +93,6 @@ public class TambahKendaraanFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_tambah_kendaraan, container, false);
         final TextView textView = root.findViewById(R.id.text_tambah_kendaraan);
-        mProgress = new ProgressDialog(getContext());
 
         namaKendaraan = root.findViewById(R.id.edtNamaKendaraan);
         hargaSewa = root.findViewById(R.id.edtHargaSewa);
@@ -116,9 +115,6 @@ public class TambahKendaraanFragment extends Fragment {
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
         mProgress = new ProgressDialog(this.getContext());
-
-        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
-
 
         tambahKendaraanViewModel.getText().observe(this, new Observer<String>() {
             @Override
@@ -173,7 +169,8 @@ public class TambahKendaraanFragment extends Fragment {
             if (TextUtils.isEmpty(txt_NamaKendaraan) || TextUtils.isEmpty(txt_HargaSewa) ||
                     TextUtils.isEmpty(txt_AlamatKendaraan) || TextUtils.isEmpty(txt_Latti) ||
                     TextUtils.isEmpty(txt_Longi) || TextUtils.isEmpty(txt_DeskripsiKendaraan) ||
-                    img_Kendaraan.sameAs(emptyBitmap) || TextUtils.isEmpty(txt_JenisKendaraan)) {
+                    img_Kendaraan.sameAs(emptyBitmap) || TextUtils.isEmpty(txt_JenisKendaraan) ||
+                    foto==null) {
                 Toast.makeText(getContext(), "Lengkapi semua field Fergusso!", Toast.LENGTH_SHORT).show();
             }
             else {
@@ -189,17 +186,22 @@ public class TambahKendaraanFragment extends Fragment {
                                 String txt_alamatKendaraan, String txt_latti, String txt_longi,
                                 String txt_deskripsiKendaraan, Bitmap img_kendaraan) {
 
-        mProgress.setMessage("Please Wait");
-        mProgress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mProgress.setCancelable(false);
-        mProgress.setCanceledOnTouchOutside(false);
-        mProgress.setIndeterminate(false);
-        mProgress.show();
+            mProgress.setMessage("Please Wait");
+            mProgress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            mProgress.setCancelable(false);
+            mProgress.setCanceledOnTouchOutside(false);
+            mProgress.setIndeterminate(false);
+            mProgress.show();
+
+
+
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
         assert firebaseUser != null;
         userid = firebaseUser.getUid();
         key = FirebaseDatabase.getInstance().getReference("Kendaraan").push().getKey();
         mReference = FirebaseDatabase.getInstance().getReference("Kendaraan").child(key);
+
+        String urlFotoKendaraan = "https://firebasestorage.googleapis.com/v0/b/sewain-fbed3.appspot.com/o/Kendaraan%2F"+userid+"%2F"+key+"?alt=media";
 
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("User Id", userid);
@@ -211,18 +213,20 @@ public class TambahKendaraanFragment extends Fragment {
         hashMap.put("Longitude", txt_longi);
         hashMap.put("Deskripsi Kendaraan", txt_deskripsiKendaraan);
         hashMap.put("Kendaraan Id", key);
+        hashMap.put("Foto Kendaraan", urlFotoKendaraan);
 
         mReference.setValue(hashMap).addOnCompleteListener(task1 -> {
         if (task1.isSuccessful()) {
             uploadImage(foto);
-            Intent intent = new Intent(getContext(), LoginActivity.class);
+            Intent intent = new Intent(getContext(), MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            Toast.makeText(this.getContext(), "Sukses insert ! " , Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.getContext(), "Sukses menambah kendaraan ! " , Toast.LENGTH_SHORT).show();
          }else{
-            Toast.makeText(this.getContext(), "Gagal insert ! " , Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.getContext(), "Gagal menambah kendaraan ! " , Toast.LENGTH_SHORT).show();
         }
          mProgress.hide();
+        mProgress.dismiss();
          });
     }
 

@@ -2,8 +2,6 @@ package com.example.sewain.ui.cari_kendaraan;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,12 +16,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sewain.Adapter.KendaraanAdapter;
 import com.example.sewain.R;
-import com.example.sewain.ui.tambah_kendaraan.TambahKendaraanViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,7 +30,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CariKendaraanFragment extends Fragment {
 
@@ -59,17 +54,8 @@ public class CariKendaraanFragment extends Fragment {
     private GridLayoutManager gridLayoutManager;
     private DatabaseReference myRef;
 
-    private Geocoder geocoder;
-    List<Address> addresses;
-
-    String Latitude = "777";
-    String Longitude = "777";
-    private TambahKendaraanViewModel tambahKendaraanViewModel;
-
     RecyclerView mRecyclerView;
     RecyclerView.Adapter mAdapter;
-
-    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -83,8 +69,14 @@ public class CariKendaraanFragment extends Fragment {
         namaKendaraan = root.findViewById(R.id.txtNamaKendaraan);
         hargaSewa = root.findViewById(R.id.txtHargwaSewa);
         lokasi = root.findViewById(R.id.txtLokasi);
+        mProgress = new ProgressDialog(this.getContext());
 
-
+        mProgress.setMessage("Please Wait");
+        mProgress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgress.setCancelable(false);
+        mProgress.setCanceledOnTouchOutside(false);
+        mProgress.setIndeterminate(false);
+        mProgress.show();
         ArrayList<CariKendaraanViewModel> listKendaraan = new ArrayList<>();
         // Write a message to the database
         myRef = FirebaseDatabase.getInstance().getReference("Kendaraan");
@@ -93,12 +85,7 @@ public class CariKendaraanFragment extends Fragment {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String mNamaKendaraan;
-                String mHargaSewa;
-                String mLokasi;
-                String idUser;
-                String idKendaraan;
-                String foto;
+                String mNamaKendaraan, mHargaSewa, mLokasi, idUser, idKendaraan, foto, mJenis, mDeskripsi, mLatit, mLongit;
                 String url="https://firebasestorage.googleapis.com/v0/b/sewain-fbed3.appspot.com/o/Kendaraan";//Retrieved url as mentioned above
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     mNamaKendaraan = (String) snapshot.child("Nama Kendaraan").getValue();
@@ -106,10 +93,13 @@ public class CariKendaraanFragment extends Fragment {
                     mLokasi = (String) snapshot.child("Lokasi Kendaraan").getValue();
                     idUser = (String) snapshot.child("User Id").getValue();
                     idKendaraan = (String) snapshot.child("Kendaraan Id").getValue();
+                    mJenis = (String) snapshot.child("Jenis Kendaraan").getValue();
+                    mDeskripsi = (String) snapshot.child("Deskripsi Kendaraan").getValue();
+                    mLatit = (String) snapshot.child("Latittude").getValue();
+                    mLongit = (String) snapshot.child("LOngitude").getValue();
                     foto = url+"%2F"+idUser+"%2F"+idKendaraan+"?alt=media";
-                    listKendaraan.add(new CariKendaraanViewModel(mNamaKendaraan, mHargaSewa, mLokasi, foto));
+                    listKendaraan.add(new CariKendaraanViewModel(idUser, idKendaraan, mNamaKendaraan, mJenis, mHargaSewa, mLatit, mLongit, mDeskripsi, mLokasi, foto));
                 }
-                LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
                 mRecyclerView = (RecyclerView) root.findViewById(R.id.recyclerview);
                 gridLayoutManager = new GridLayoutManager(getContext(), 2);
                 mRecyclerView.setLayoutManager(gridLayoutManager);
@@ -117,6 +107,8 @@ public class CariKendaraanFragment extends Fragment {
                     mAdapter = new KendaraanAdapter(getContext(), listKendaraan);
                 }
                 mRecyclerView.setAdapter(mAdapter);
+                mProgress.hide();
+                mProgress.dismiss();
             }
 
             @Override

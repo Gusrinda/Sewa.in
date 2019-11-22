@@ -41,7 +41,8 @@
         android:layout_height="18dp"
         android:text="Ambil Foto"
         android:textSize="10sp"
-        android:background="@color/fui_transparent"
+        android:textColor="#FEFEFE"
+        android:background="#4CAF50"
         />
 
     <TextView
@@ -62,7 +63,8 @@
         android:layout_height="18dp"
         android:text="Ambil Foto"
         android:textSize="10sp"
-        android:background="@color/fui_transparent"
+        android:textColor="#FEFEFE"
+        android:background="#4CAF50"
         />
 
     <LinearLayout

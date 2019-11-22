@@ -1,15 +1,9 @@
 package com.example.sewain;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,12 +14,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.sewain.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -35,7 +33,6 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.UUID;
 
 public class RegisterNextActivity extends AppCompatActivity implements User.UserValueListener{
 
@@ -138,6 +135,7 @@ public class RegisterNextActivity extends AppCompatActivity implements User.User
                     public void onSuccess(Uri uri) {
                         Uri downloadUri = uri;
                         String urlGambarAkun = downloadUri.toString();
+                        String urlKTP = "https://firebasestorage.googleapis.com/v0/b/sewain-fbed3.appspot.com/o/images%2Fuser%2F"+UID+"%2FKTP-"+NamaUser+"?alt=media";
 
                         mReference = FirebaseDatabase.getInstance().getReference("Users").child(UID);
 
@@ -146,6 +144,7 @@ public class RegisterNextActivity extends AppCompatActivity implements User.User
                         hashMap.put("username", NamaUser);
                         hashMap.put("email", Email);
                         hashMap.put("urlPhoto", urlGambarAkun);
+                        hashMap.put("urlKTP", urlKTP);
 
                         mReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override

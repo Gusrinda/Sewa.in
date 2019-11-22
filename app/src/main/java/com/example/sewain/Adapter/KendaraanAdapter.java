@@ -1,6 +1,7 @@
 package com.example.sewain.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.sewain.DetailKendaraanFragment;
+import com.example.sewain.DetailKendaraanActivity;
 import com.example.sewain.R;
 import com.example.sewain.ui.cari_kendaraan.CariKendaraanViewModel;
 
@@ -53,18 +54,26 @@ public class KendaraanAdapter extends RecyclerView.Adapter <KendaraanAdapter.Cus
         final CariKendaraanViewModel current = kendaraan.get(position);
 // Add the data to the view
         Glide.with(context).load(current.getFoto()).into(mFotoKendaraan);
-//        mFotoKendaraan.setBackground(ContextCompat.getDrawable(mInflater.getContext(), current.get));
         mNamaKendaraan.setText(current.getNama_kendaraan());
         mHargaSewa.setText(current.getHarga_sewa());
         mLokasi.setText(current.getLokasi());
-//        cardView.setVisibility(current.visibility);
 // add the Listener to the view of that position if desired
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DetailKendaraanFragment detailKendaraanFragment = new DetailKendaraanFragment();
-                loadFragment(detailKendaraanFragment);
-
+                Intent intent = new Intent(context, DetailKendaraanActivity.class);
+                intent.putExtra("namaKendaraan", current.getNama_kendaraan());
+                intent.putExtra("jenisKendaraan", current.getJenis_kendaraan());
+                intent.putExtra("hargaSewa", current.getHarga_sewa());
+                intent.putExtra("fotoKendaraan", current.getFoto());
+                intent.putExtra("lokasiKendaraan", current.getLokasi());
+                intent.putExtra("deskripsiKendaraan", current.getDeskripsi());
+                intent.putExtra("userId", current.getId_user());
+                intent.putExtra("kendaraanId", current.getId_kendaraan());
+//                DetailKendaraanActivity detailKendaraanActivity = new DetailKendaraanActivity();
+                context.startActivity(intent);
+// set Fragmentclass Arguments
+//                detailKendaraanActivity.setArguments(bundle);
             }
         });
     }
